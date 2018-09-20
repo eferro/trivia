@@ -52,9 +52,7 @@ class Game2:
                 self.is_getting_out_of_penalty_box = True
                 
                 print("%s is getting out of the penalty box" % self.players[self.current_player])
-                self.places[self.current_player] = self.places[self.current_player] + roll
-                if self.places[self.current_player] > 11:
-                    self.places[self.current_player] = self.places[self.current_player] - 12
+                self._update_place(roll)
                 
                 print(self.players[self.current_player] + \
                             '\'s new location is ' + \
@@ -65,15 +63,18 @@ class Game2:
                 print("%s is not getting out of the penalty box" % self.players[self.current_player])
                 self.is_getting_out_of_penalty_box = False
         else:
-            self.places[self.current_player] = self.places[self.current_player] + roll
-            if self.places[self.current_player] > 11:
-                self.places[self.current_player] = self.places[self.current_player] - 12
+            self._update_place(roll)
             
             print(self.players[self.current_player] + \
                         '\'s new location is ' + \
                         str(self.places[self.current_player]))
             print("The category is %s" % self._current_category)
             self._ask_question()
+
+    def _update_place(self, roll):
+        self.places[self.current_player] = self.places[self.current_player] + roll
+        if self.places[self.current_player] > 11:
+            self.places[self.current_player] = self.places[self.current_player] - 12
     
     def _ask_question(self):
         if self._current_category == 'Pop': print(self.pop_questions.pop(0))
@@ -139,6 +140,7 @@ class Game2:
     
     def _did_player_win(self):
         return not (self.purses[self.current_player] == 6)
+
 
 class Game:
     def __init__(self):
