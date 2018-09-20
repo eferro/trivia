@@ -53,23 +53,21 @@ class Game2:
                 
                 print("%s is getting out of the penalty box" % self.players[self.current_player])
                 self._update_place(roll)
-                
-                print(self.players[self.current_player] + \
-                            '\'s new location is ' + \
-                            str(self.places[self.current_player]))
-                print("The category is %s" % self._current_category)
+                self._report_new_location()
                 self._ask_question()
             else:
                 print("%s is not getting out of the penalty box" % self.players[self.current_player])
                 self.is_getting_out_of_penalty_box = False
         else:
             self._update_place(roll)
-            
-            print(self.players[self.current_player] + \
-                        '\'s new location is ' + \
-                        str(self.places[self.current_player]))
-            print("The category is %s" % self._current_category)
+            self._report_new_location()
             self._ask_question()
+
+    def _report_new_location(self):
+        print(self.players[self.current_player] + \
+                    '\'s new location is ' + \
+                    str(self.places[self.current_player]))
+        print("The category is %s" % self._current_category)
 
     def _update_place(self, roll):
         self.places[self.current_player] = self.places[self.current_player] + roll
