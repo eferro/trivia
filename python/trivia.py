@@ -113,9 +113,6 @@ class Game2:
                 self.current_player += 1
                 if self.current_player == len(self.players): self.current_player = 0
                 return True
-            
-            
-            
         else:
             
             print("Answer was corrent!!!!")
@@ -328,7 +325,8 @@ def game_run2():
 import io
 import sys
 import random
-from difflib import context_diff
+from difflib import unified_diff, Differ
+from pprint import pprint
 
 def capture_console(func):
     f = io.StringIO()
@@ -341,13 +339,18 @@ def capture_console(func):
     return f.getvalue()
 
 
+import unittest
+
+class TestGame(unittest.TestCase):
+
+    def test_game(self):
+        for seed in range(10):
+            for c in range(100):
+                random.seed(seed)
+                old_output = capture_console(game_run1)
+                random.seed(seed)
+                new_output = capture_console(game_run2)
+                self.assertEqual(old_output, new_output)
+
 if __name__ == '__main__':
-    for seed in range(10):
-        for c in range(1000):
-            random.seed(seed)
-            old_output = capture_console(game_run1)
-            random.seed(seed)
-            new_output = capture_console(game_run2)
-            if old_output != new_output:
-                sys.stdout.writelines(context_diff(old_output, new_output, fromfile='old', tofile='new'))
-                input()
+    unittest.main()
