@@ -340,12 +340,11 @@ class TestGame(unittest.TestCase):
 
     def test_game(self):
         for seed in range(30):
-            for c in range(100):
-                random.seed(seed)
-                old_output = capture_console(game_run1)
-                random.seed(seed)
-                new_output = capture_console(game_run2)
-                self.assertEqual(old_output, new_output)
+            random.seed(seed)
+            old_output = capture_console(game_run1)
+            random.seed(seed)
+            new_output = capture_console(game_run2)
+            self.assertEqual(old_output, new_output)
 
 if __name__ == '__main__':
     unittest.main()
