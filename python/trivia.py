@@ -320,8 +320,6 @@ def game_run2():
 import io
 import sys
 import random
-from difflib import unified_diff, Differ
-from pprint import pprint
 
 def capture_console(func):
     f = io.StringIO()
